@@ -35,20 +35,16 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     # Minecraft
-    # - name: download Minecraft
-    #   run: wget https://launcher.mojang.com/download/Minecraft.deb
-    # - name: install Minecraft
-    #   run: sudo apt-get install ./Minecraft.deb
-    # - name: launch and close Minecraft
-    #   run: minecraft-launcher & sleep 5 & wait $! && kill -9 `jobs -p`
-    - name: where we at?
-      run: |
-        ls -A
-        ls -A ~
-        pwd
-    # need a step here to get the /home/user/.minecraft/versions/1.16.5 folder ... not sure if the above MC steps are needed
+    - name: setup Minecraft dir
+      run: mkdir ~/.minecraft
+    # need a step here to get the MC sources
     - name: NOTE
-      run: echo "need a step here to get the /home/user/.minecraft/versions/1.16.5 folder ... not sure if the above MC steps are needed"
+      run: echo "need a step here to get the folders, ~/.minecraft/versions/version_manifest_v2.json , ~/.minecraft/versions/1.16.5 , ~/.minecraft/libraries , ~/.minecraft/assets"
+    # source here
+    - name: get sauce
+      run: |
+      wget https://gitlab.com/sbm202/sauce_1165/-/archive/master/sauce_1165-master.tar.gz -o ~/.minecraft/sauce.tar.gz
+      tar -xzvf ~/.minecraft/sauce.tar.gz -C ~/.minecraft
     # Vive
     - name: install Vivecraft
       run: ./install.sh
