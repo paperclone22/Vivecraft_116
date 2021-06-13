@@ -44,7 +44,8 @@ jobs:
     - name: where we at?
       run: |
         ls -A
-        la -A ~
+        ls -A ~
+        pwd
     # need a step here to get the /home/user/.minecraft/versions/1.16.5 folder ... not sure if the above MC steps are needed
     - name: NOTE
       run: echo "need a step here to get the /home/user/.minecraft/versions/1.16.5 folder ... not sure if the above MC steps are needed"
