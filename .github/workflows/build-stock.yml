@@ -1,0 +1,58 @@
+# This workflow will build a Java project with Maven ... not actually using Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Build with Java Python CI
+
+on:
+  push:
+    branches: [ gh-actions-vr ]
+  pull_request:
+    branches: [ gh-actions-vr ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Java
+    - uses: actions/checkout@v2
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
+      with:
+        java-version: '8'
+        distribution: 'adopt'
+    # Python
+    - name: Set up Python 2.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 2.7
+    - name: Install python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # Minecraft
+    - name: setup Minecraft dir
+      run: mkdir ~/.minecraft
+    # need a step here to get the MC sources
+    - name: NOTE
+      run: echo "need a step here to get the folders, ~/.minecraft/versions/version_manifest_v2.json , ~/.minecraft/versions/1.16.5 , ~/.minecraft/libraries , ~/.minecraft/assets"
+    # source here
+    - name: get sauce
+      run: git clone https://gitlab.com/sbm202/sauce_1165.git ~/.minecraft
+      # run: wget https://gitlab.com/sbm202/sauce_1165/-/archive/master/sauce_1165-master.tar.gz -o ~/.minecraft/sauce.tar
+    # - name: extract sauce
+    #   run: tar -xvf ~/.minecraft/sauce.tar -C ~/.minecraft
+    # Optifine maybe a better timeout
+    - name: dir
+      run: mkdir -p /home/runner/work/Vivecraft_116/Vivecraft_116/mcp940/jars/libraries/optifine/OptiFine/1.16.5_HD_U_G6
+    - name: get optifine
+      run: wget http://vivecraft.org/jar/build/OptiFine-1.16.5_HD_U_G6.jar -O /home/runner/work/Vivecraft_116/Vivecraft_116/mcp940/jars/libraries/optifine/OptiFine/1.16.5_HD_U_G6/OptiFine-1.16.5_HD_U_G6.jar --no-check-certificate
+    # Vive
+    - name: install Vivecraft
+      run: ./install.sh
+    - name: build Vivecraft
+      run: ./build.sh
