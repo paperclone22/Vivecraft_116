@@ -50,7 +50,7 @@ jobs:
     - name: dir
       run: mkdir -p /home/runner/work/Vivecraft_116/Vivecraft_116/mcp940/jars/libraries/optifine/OptiFine/1.16.5_HD_U_G6
     - name: get optifine
-      run: wget http://vivecraft.org/jar/build/OptiFine-1.16.5_HD_U_G6.jar -O /home/runner/work/Vivecraft_116/Vivecraft_116/mcp940/jars/libraries/optifine/OptiFine/1.16.5_HD_U_G6/OptiFine-1.16.5_HD_U_G6.jar
+      run: wget http://vivecraft.org/jar/build/OptiFine-1.16.5_HD_U_G6.jar -O /home/runner/work/Vivecraft_116/Vivecraft_116/mcp940/jars/libraries/optifine/OptiFine/1.16.5_HD_U_G6/OptiFine-1.16.5_HD_U_G6.jar --no-check-certificate
     # Vive
     - name: install Vivecraft
       run: ./install.sh
