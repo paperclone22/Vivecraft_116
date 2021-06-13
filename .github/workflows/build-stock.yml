@@ -42,9 +42,10 @@ jobs:
       run: echo "need a step here to get the folders, ~/.minecraft/versions/version_manifest_v2.json , ~/.minecraft/versions/1.16.5 , ~/.minecraft/libraries , ~/.minecraft/assets"
     # source here
     - name: get sauce
-      run: wget https://gitlab.com/sbm202/sauce_1165/-/archive/master/sauce_1165-master.tar.gz -o ~/.minecraft/sauce.tar
-    - name: extract sauce
-      run: tar -xvf ~/.minecraft/sauce.tar -C ~/.minecraft
+      run: git clone https://gitlab.com/sbm202/sauce_1165.git ~/.minecraft
+      # run: wget https://gitlab.com/sbm202/sauce_1165/-/archive/master/sauce_1165-master.tar.gz -o ~/.minecraft/sauce.tar
+    # - name: extract sauce
+    #   run: tar -xvf ~/.minecraft/sauce.tar -C ~/.minecraft
     # Vive
     - name: install Vivecraft
       run: ./install.sh
